@@ -7,16 +7,18 @@ const jobOptions = {
     attempts: 3 // attempt if job is error retry 3 times
 };
 
-const data = {
-    message: 'hello from producer i am request to consumer file json country',
-    param: 'AF'
-}
 const nameQueue = 'request-json-file'
 
-const init = async () => {
+const init = async (data) => {
     return await connectQueue(nameQueue).add(data, jobOptions)
 }
-
-init().then(res => {
-    console.info(res.data)
-})
+const countryCode = ['ID', 'RU', 'TR', 'IT']
+for (let i = 0; i < countryCode.length; i++) {
+    const data = {
+        message: `hello from producer i am request to consumer file json country with code ${countryCode[i]}`,
+        param: countryCode[i]
+    }
+    init(data).then(res => {
+        console.info(res.data.message)
+    })
+}

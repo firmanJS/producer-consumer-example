@@ -1,6 +1,6 @@
 const handlerCompleted = (job) => {
     console.info(
-        `Job in ${job.queue.name} completed for: ${job.id}`
+        `Job in ${job.queue.name} completed for: ${job.data.message}`
     )
     job.remove()
 }
